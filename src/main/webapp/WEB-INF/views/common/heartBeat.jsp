@@ -9,9 +9,3 @@
 <style>
 	.btn-close { filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%); }
 </style>
-<script>
-	const staffCodeForWebSocketConnection = '<sec:authentication property="principal.username"/>';
-	connectWebSocket(staffCodeForWebSocketConnection);
-	const staffCodeForAlert = document.querySelector('#loggedStaffCodeForWebSocket').value;
-	renderAlerts(staffCodeForAlert);
-</script>

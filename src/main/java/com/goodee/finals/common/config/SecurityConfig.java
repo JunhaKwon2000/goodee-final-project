@@ -52,7 +52,7 @@ public class SecurityConfig {
 		.authorizeHttpRequests((option) -> { option
 			// static resources
 			.requestMatchers("/css/**", "/js/**", "/images/**", "/WEB-INF/**", "/staff/login").permitAll()
-			.anyRequest().authenticated()
+			.anyRequest().permitAll();
 			;
 		})
 		

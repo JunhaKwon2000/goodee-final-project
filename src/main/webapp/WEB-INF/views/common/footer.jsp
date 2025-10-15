@@ -20,21 +20,6 @@
 }
 </style>
 
-<!-- Messenger -->
-<sec:authorize access="isAuthenticated()">
-	<div class="fixed-plugin" onclick="openMessenger()">
-	  <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-	    <i class="material-symbols-rounded py-2">sms</i>
-	    <span class="badge badge-footer-display">0</span>
-	  </a>
-	</div>
-	<div class="fixed-plugin" onclick="openFault()">
- 	 <a class="fixed-plugin-button text-dark position-fixed px-3 py-2"  style="bottom: 98px !important;">
-   		<i class="material-symbols-rounded py-2">build_circle</i>
- 	 </a>
-	</div>
-</sec:authorize>
-
 <!-- Popper.js -->
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 
@@ -51,33 +36,6 @@
 <script src="/js/material-dashboard.js"></script>
 
 <script src="/js/messenger/footer.js"></script>
-<script>
-	<sec:authorize access="isAuthenticated()">
-		fetch('/msg/footer')
-	    .then(response => response.json())
-	    .then(response => {
-	        let result = response.map(room => room.chatRoomNum);
-	        fetch("/msg/unread/count", {
-	            method: "POST",
-	            headers: { "Content-Type": "application/json" },
-	            body: JSON.stringify(result)
-	        })
-	        .then(res => res.json())
-	        .then(res => {
-	        	result.forEach(room => {
-	        		chatCountGlobal += res.unread[room]; // 이거 변수는 heartBeat.js 에 존재함
-	        	});
-	        	let bdg = document.querySelector('.badge-footer-display');
-	        	let count = chatCountGlobal;
-	        	if (count > 9) {
-	        		bdg.innerText = '9+';
-	        	} else {
-	        		bdg.innerText = count;
-	        	}
-	        })
-	    });
-	</sec:authorize>
-</script>
 
 <script>
 if (!window.location.pathname.startsWith("/drive")) {
