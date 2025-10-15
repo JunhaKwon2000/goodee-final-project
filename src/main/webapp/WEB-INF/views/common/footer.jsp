@@ -20,6 +20,13 @@
 }
 </style>
 
+	<div class="fixed-plugin" onclick="openMessenger()">
+	  <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+	    <i class="material-symbols-rounded py-2">sms</i>
+	    <span class="badge badge-footer-display">0</span>
+	  </a>
+	</div>
+
 <!-- Popper.js -->
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 
