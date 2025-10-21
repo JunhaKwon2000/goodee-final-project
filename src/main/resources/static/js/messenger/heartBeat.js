@@ -10,7 +10,7 @@ let alertCountNoDelete = 0;
 let chatCountGlobal = 0;
 
 function connectWebSocket(staffCode) {
-	const socket = new SockJS('http://localhost/ws-stomp');
+	const socket = new SockJS('http://15.165.140.159/ws-stomp');
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function(frame) {
 		console.log("Connected: " + frame);

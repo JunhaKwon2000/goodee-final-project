@@ -3,7 +3,7 @@
  */
 let stompClient = null;
 function connectWebSocketChatList(rooms) {
-	const socket = new SockJS('http://localhost/ws-stomp');
+	const socket = new SockJS('http://15.165.140.159/ws-stomp');
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function(frame) {
 		console.log("Connected: " + frame);
