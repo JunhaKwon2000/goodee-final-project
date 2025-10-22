@@ -24,7 +24,7 @@
 			</sec:authorize>
 			<form:form action="/msg/create" method="post" id="form" modelAttribute="chatRoomDTO">
 			    <label for="chatRoomName">채팅방 이름</label>
-			    <input type="text" name="chatRoomName" id="chatRoomName" placeholder="방 이름을 입력해주세요">
+			    <input type="text" name="chatRoomName" id="chatRoomName" placeholder="방 이름을 입력해주세요" autocomplete="off">
 			    <form:errors path="chatRoomName"></form:errors>
 			    <input type="hidden" id="addedStaff" name="addedStaff">
 			</form:form>
