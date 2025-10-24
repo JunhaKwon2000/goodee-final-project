@@ -1,8 +1,16 @@
 package com.goodee.finals.product;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +24,6 @@ import com.goodee.finals.common.attachment.AttachmentRepository;
 import com.goodee.finals.common.attachment.ProductAttachmentDTO;
 import com.goodee.finals.common.file.FileService;
 import com.goodee.finals.staff.StaffDTO;
-import com.goodee.finals.staff.StaffRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -184,5 +191,43 @@ public class ProductService {
 		ProductDTO result = productRepository.save(productDTO);
 		return result;
 	}
+	
+	// 엑셀용 전체 리스트
+    public List<ProductDTO> getProductSearchListForExcel(String search) {
+        return productRepository.findBySearchKeyword(search);
+    }
+
+    // 엑셀 작성
+    public void writeProductExcel(List<ProductDTO> list, OutputStream os) throws IOException {
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("물품리스트");
+
+        // 헤더 작성
+        Row header = sheet.createRow(0);
+        String[] headers = {"물품번호", "물품타입", "물품명", "규격", "재고수량"};
+        for (int i = 0; i < headers.length; i++) {
+            Cell cell = header.createCell(i);
+            cell.setCellValue(headers[i]);
+        }
+
+        // 데이터 작성
+        int rowIdx = 1;
+        for (ProductDTO p : list) {
+            Row row = sheet.createRow(rowIdx++);
+            row.createCell(0).setCellValue(p.getProductCode());
+            row.createCell(1).setCellValue(p.getProductTypeDTO().getProductTypeName());
+            row.createCell(2).setCellValue(p.getProductName());
+            row.createCell(3).setCellValue(p.getProductSpec());
+            row.createCell(4).setCellValue(p.getProductAmount());
+        }
+
+        // 열 너비 자동 조정
+        for (int i = 0; i < headers.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        workbook.write(os);
+        workbook.close();
+    }
 	
 }

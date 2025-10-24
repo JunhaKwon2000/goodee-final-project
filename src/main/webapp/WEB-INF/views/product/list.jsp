@@ -11,11 +11,7 @@
 		.sidenav .nav-link {
 		  white-space: nowrap; /* 줄바꿈 방지 */
 		}
-		aside.sidenav {
-		  width: 200px !important;   /* 원하는 값 (180~220px 정도 추천) */
-		  min-width: 200px !important;
-		  max-width: 200px !important;
-		}
+
 		table tbody tr:hover {
 			cursor: pointer;
 	    }
@@ -33,7 +29,7 @@
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
     <c:import url="/WEB-INF/views/common/nav.jsp"></c:import>
     <div class="d-flex">
-    <aside class="sidenav navbar navbar-vertical border-radius-lg ms-2 bg-white my-2 w-10 align-items-start" style="width: 200px; height: 92vh;">
+    <aside class="sidenav navbar navbar-vertical border-radius-lg ms-2 bg-white my-2 w-10 align-items-start" style="width: 200px !important; height: 92vh;">
     		<div class="w-100">
 			    <ul class="navbar-nav">
 
@@ -133,6 +129,10 @@
 					<div>
 					    <button onclick="location.href='/product/write'" class="btn btn-sm btn-outline-secondary bg-gradient-dark text-white me-3">등록</button>
 					</div>
+					<button class="btn btn-sm btn-outline-secondary bg-gradient-dark text-white ms-2"
+					        onclick="downloadExcel()">
+					    Excel
+					</button>
 				</div>
 		      </c:if>
 	    	</div>

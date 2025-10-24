@@ -52,10 +52,10 @@
 			           
 			<!-- 어트랙션 코드 -->
 			<div class="form-group row mb-3">
-			  <form:label path="rideDTO.rideCode" class="col-sm-4 col-form-label text-start">어트랙션 코드</form:label>
+			  <form:label path="rideDTO.rideCode" class="col-sm-4 col-form-label text-start">어트랙션</form:label>
 			  <div class="col-sm-5">
 			    <form:select path="rideDTO.rideCode" cssClass="form-select">
-			      <form:option value="">-- 어트랙션 코드를 선택하세요 --</form:option>
+			      <form:option value="">-- 어트랙션을 선택하세요 --</form:option>
 			      <c:forEach var="ride" items="${rideList}">
 			        <form:option value="${ride.rideCode}">${ride.rideName} (${ride.rideCode})</form:option>
 			      </c:forEach>
@@ -122,7 +122,7 @@
 			  </div>
 			</div>
 			           
-			<!-- 사진첨부 -->
+			<!-- 첨부파일 -->
 			<div class="form-group row mb-3">
 			  <form:label path="" class="col-sm-4 col-form-label text-start">첨부파일</form:label>
 			  <div class="col-sm-5">
@@ -134,17 +134,10 @@
 			      <input type="hidden" id="hasExistingFile" value="false"/>
 			    </c:if>
 			
-			    <img id="preview"
-			         style="object-fit: cover; width:200px; height:200px; !important;"
-			         <c:if test="${ not empty inspectionDTO.isptNum }">
-			           src="/file/inspection/${ inspectionDTO.inspectionAttachmentDTO.attachmentDTO.savedName }"
-			         </c:if>
-			         class="border border-1 border-dark p-1"/>
-			    <label for="attach">
-			      <div class="btn btn-outline-secondary px-2 py-0 m-auto">어트랙션 점검 기록 사진 등록</div>
-			    </label>
+				<div class="form-group">
+					 <input type="file" id="attach" name="attach" style=" width: 100%; padding: 4px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+				</div>
 			  </div>
-			  <input type="file" class="d-none" id="attach" name="attach"/>
 			</div>
 		
 			<!-- 버튼 -->

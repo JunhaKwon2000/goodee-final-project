@@ -60,10 +60,12 @@ function renderProduct(r) {
 		
 		const tr = document.createElement("tr");
 		tr.innerHTML = `
-		<td>${product.productCode}</td>
-		<td>${product.productTypeDTO.productTypeName}</td>
-		<td>${product.productName}</td>
-		<td>
+		<td style="text-align:center; vertical-align: middle;">${product.productCode}</td>
+		<td style="vertical-align: middle;">${product.productTypeDTO.productTypeName}</td>
+		<td style="vertical-align: middle;">${product.productName}</td>
+		<td style="vertical-align: middle;">${product.productSpec}</td>
+		<td style="text-align:center; vertical-align: middle;">${product.productAmount}</td>
+		<td style="text-align:center; vertical-align: middle;">
 			<button type="button"
 				class="btn btn-sm bg-gradient-dark select-product"
 				onclick="selectProduct(

@@ -55,6 +55,12 @@ if(shareStaffs) {
 // 모달창 닫히면 추가된 사원 목록 초기화
 document.addEventListener("hidden.bs.modal", () => {
 	selectedList.innerHTML = '';
+	searchInput.value = '';
+	const checkboxs = staffList.querySelectorAll('input[type="checkbox"]');
+	checkboxs.forEach((chkbox) =>{
+		chkbox.checked = false;
+	})
+	
 	checkAllStaff.checked = false;
 })
 

@@ -107,10 +107,10 @@
 					</tbody>
 				  </table>
 				  
-				  <div class="mt-2 d-flex justify-content-end me-4">
+				  <div class="mt-2 d-flex justify-content-start ms-2">
 				  	<span>총 ${ docList.content.size() }개</span>
 				  </div>
-				  
+				  	
 				</div>
 					
 				  <c:if test="${ docList.content.size() gt 0 }">

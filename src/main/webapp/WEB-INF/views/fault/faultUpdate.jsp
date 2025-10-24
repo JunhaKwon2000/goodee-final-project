@@ -55,9 +55,9 @@
 						
 			<!-- 어트랙션 코드 (수정불가 → hidden으로 유지) -->
 			<div class="form-group row mb-3">
-			  <form:label path="rideDTO.rideCode" class="col-sm-4 col-form-label text-start">어트랙션 코드</form:label>
+			  <form:label path="rideDTO.rideCode" class="col-sm-4 col-form-label text-start">어트랙션</form:label>
 			  <div class="col-sm-5">
-			    <div>${faultDTO.rideDTO.rideCode}</div>
+			    <div>${faultDTO.rideDTO.rideName}(${faultDTO.rideDTO.rideCode})</div>
 			    <form:hidden path="rideDTO.rideCode"/>
 			  </div>
 			</div>
@@ -159,7 +159,7 @@
 				<!-- 시설부서(deptCode == 1003)일 때만 등록 버튼 보이기 -->
 				<c:if test="${staff.deptDTO.deptCode eq 1003}">
 				    <div class="form-group row mt-4 text-end">
-				      <div class="col-sm-12">
+				      <div class="col-sm-9">
 				      	<!-- 수정 버튼 -> add 페이지로가는데 입력된 정보 가지고 감 -->
 				      	<form action="${pageContext.request.contextPath }/fault/${fault.isptNum}/update"
 				      			method="get" style="display: inline;">

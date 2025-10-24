@@ -113,6 +113,7 @@ public class CalendarService {
 		
 		if(!staffDTO.getStaffCode().equals(oriCal.getStaffDTO().getStaffCode())) return result;
 		
+		oriCal.setCalIsAllDay(calendarDTO.getCalIsAllDay());
 		oriCal.setCalStart(calendarDTO.getCalStart());
 		oriCal.setCalEnd(calendarDTO.getCalEnd());
 		

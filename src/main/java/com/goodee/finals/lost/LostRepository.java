@@ -1,12 +1,16 @@
 package com.goodee.finals.lost;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import com.goodee.finals.productManage.ProductManageDTO;
 
 @Repository
 public interface LostRepository extends JpaRepository<LostDTO, Long>{
@@ -31,4 +35,18 @@ public interface LostRepository extends JpaRepository<LostDTO, Long>{
 	Page<LostDTO> findAllBySearch(LocalDate startDate, LocalDate endDate, String search, Pageable pageable);
 	
 	long countByLostDeleteFalse();
+	
+	@Query("SELECT l FROM LostDTO l " +
+		       "JOIN l.staffDTO s " +
+		       "WHERE (" +
+		       "LOWER(s.staffName) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
+		       "LOWER(l.lostName) LIKE LOWER(CONCAT('%', :search, '%'))" +
+		       ") " +
+		       "AND (:startDate IS NULL OR l.lostDate >= :startDate) " +
+		       "AND (:endDate IS NULL OR l.lostDate <= :endDate) " +
+		       "ORDER BY l.lostNum DESC")
+		List<LostDTO> findBySearchKeyword(@Param("startDate") LocalDate startDate,
+		                                           @Param("endDate") LocalDate endDate,
+		                                           @Param("search") String search);
+	
 }

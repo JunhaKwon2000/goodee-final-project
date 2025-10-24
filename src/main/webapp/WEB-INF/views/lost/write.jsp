@@ -86,7 +86,7 @@
 		        
 		        <div class="form-group">
 		          <form:label path="lostNote">특이사항</form:label>
-		          <textarea class="form-control" id="lostNote" name="lostNote" rows="3" style="width: 90%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; resize:none;" placeholder="ex)  습득 장소: 회전목마 옆 벤치">${lostDTO.lostNote }</textarea>
+		          <textarea class="form-control" id="lostNote" name="lostNote" rows="3" style="width: 90%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; resize:none;" placeholder="ex)  습득날짜 또는 습득장소">${lostDTO.lostNote }</textarea>
 		          <form:errors path="lostNote"></form:errors>
 		        </div>
 	        </div>
@@ -94,7 +94,7 @@
 		    
 	        <div class="mt-4 d-flex justify-content-center gap-3">
 		        <button type="submit" class="btn btn-sm btn-outline-secondary bg-gradient-dark text-white me-3" style="width: 100px;">${ empty lostDTO.lostNum ? "등록" : "수정" }</button>
-		        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="history.back();" style="width: 100px;">취소</button>
+		        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/lost'" style="width: 100px;">취소</button>
 	        </div>
 	      </div>
 	      </form:form>

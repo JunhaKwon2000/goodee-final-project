@@ -26,6 +26,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	@Autowired
 	CheckStaffEnableInterceptor checkStaffEnableInterceptor;
 	
+
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(noticeCheckLoginInterceptor)
@@ -37,6 +39,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		registry.addInterceptor(productCheckAuthInterceptor)
 				.addPathPatterns("/product/write", "/product/*/update", "/product/*/delete", "/productManage/write");
 		registry.addInterceptor(checkStaffEnableInterceptor).addPathPatterns("/**");
+		registry.addInterceptor(checkStaffEnableInterceptor);
 	}
 	
 }

@@ -2,6 +2,10 @@ package com.goodee.finals.product;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +22,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.goodee.finals.lost.LostDTO;
 import com.goodee.finals.staff.StaffDTO;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @Controller
@@ -49,6 +56,24 @@ public class ProductController {
 		model.addAttribute("staffDTO", staffDTO);
 		
 		return "product/list";
+	}
+	
+	@GetMapping("/excel")
+	public void downloadExcel(@RequestParam(required = false) String search, 
+								HttpServletResponse response) throws IOException {
+	    if (search == null) search = "";
+
+	    // 전체 데이터 조회
+	    List<ProductDTO> list = productService.getProductSearchListForExcel(search);
+
+	    // 파일명 지정
+	    String fileName = URLEncoder.encode("물품리스트.xlsx", StandardCharsets.UTF_8);
+
+	    response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+	    response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+
+	    // 서비스에서 엑셀 파일 생성
+	    productService.writeProductExcel(list, response.getOutputStream());
 	}
 	
 	@GetMapping("{productCode}")

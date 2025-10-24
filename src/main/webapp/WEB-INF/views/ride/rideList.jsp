@@ -46,12 +46,12 @@
 			      <c:forEach var="ride" items="${railRides}">
 			        <div class="col-md-4 col-sm-6 mb-4 text-center">
 			          <!-- DB에서 불러온 이미지 -->
+			          <a href="${pageContext.request.contextPath }/ride/${ride.rideCode}">
 			          <img alt="${ride.rideName}"
 		         			src="/file/ride/${ ride.rideAttachmentDTO.attachmentDTO.savedName }"	
 			               style="width:300px; height:300px; object-fit:cover; border-radius:8px;">
 			          <!-- 어트랙션 이름 -> 클릭 시 상세페이지로 이동 -->
 			          <div class="ride-name mt-2" style="font-size:20px;">
-			          	<a href="${pageContext.request.contextPath }/ride/${ride.rideCode}">
 			          		${ride.rideName }
 			          	</a>
 			          </div>
@@ -74,12 +74,12 @@
 			      <c:forEach var="ride" items="${rotationRides}">
 			        <div class="col-md-4 col-sm-6 mb-4 text-center">
 			          <!-- DB에서 불러온 이미지 -->
+			          <a href="${pageContext.request.contextPath }/ride/${ride.rideCode}">
 			          <img alt="${ride.rideName}"
 		         			src="/file/ride/${ ride.rideAttachmentDTO.attachmentDTO.savedName }"	
 			               style="width:300px; height:300px; object-fit:cover; border-radius:8px;">
 			          <!-- 어트랙션 이름 -> 클릭 시 상세페이지로 이동 -->
 			          <div class="ride-name mt-2" style="font-size:20px;">
-			          	<a href="${pageContext.request.contextPath }/ride/${ride.rideCode}">
 			          		${ride.rideName }
 			          	</a>
 			          </div>
@@ -102,12 +102,12 @@
 			      <c:forEach var="ride" items="${waterRides}">
 			        <div class="col-md-4 col-sm-6 mb-4 text-center">
 			          <!-- DB에서 불러온 이미지 -->
+		          	  <a href="${pageContext.request.contextPath }/ride/${ride.rideCode}">
 			          <img alt="${ride.rideName}"
 		         			src="/file/ride/${ ride.rideAttachmentDTO.attachmentDTO.savedName }"	
 			               style="width:300px; height:300px; object-fit:cover; border-radius:8px;">
 			          <!-- 어트랙션 이름 -> 클릭 시 상세페이지로 이동 -->
 			          <div class="ride-name mt-2" style="font-size:20px;">
-			          	<a href="${pageContext.request.contextPath }/ride/${ride.rideCode}">
 			          		${ride.rideName }
 			          	</a>
 			          </div>
@@ -130,12 +130,12 @@
 			      <c:forEach var="ride" items="${viewRides}">
 			        <div class="col-md-4 col-sm-6 mb-4 text-center">
 			          <!-- DB에서 불러온 이미지 -->
+			          <a href="${pageContext.request.contextPath }/ride/${ride.rideCode}">
 			          <img alt="${ride.rideName}"
 		         			src="/file/ride/${ ride.rideAttachmentDTO.attachmentDTO.savedName }"	
 			               style="width:300px; height:300px; object-fit:cover; border-radius:8px;">
 			          <!-- 어트랙션 이름 -> 클릭 시 상세페이지로 이동 -->
 			          <div class="ride-name mt-2" style="font-size:20px;">
-			          	<a href="${pageContext.request.contextPath }/ride/${ride.rideCode}">
 			          		${ride.rideName }
 			          	</a>
 			          </div>
@@ -158,12 +158,12 @@
 			      <c:forEach var="ride" items="${kidsRides}">
 			        <div class="col-md-4 col-sm-6 mb-4 text-center">
 			          <!-- DB에서 불러온 이미지 -->
+			          <a href="${pageContext.request.contextPath }/ride/${ride.rideCode}">
 			          <img alt="${ride.rideName}"
 		         			src="/file/ride/${ ride.rideAttachmentDTO.attachmentDTO.savedName }"	
 			               style="width:300px; height:300px; object-fit:cover; border-radius:8px;">
 			          <!-- 어트랙션 이름 -> 클릭 시 상세페이지로 이동 -->
 			          <div class="ride-name mt-2" style="font-size:20px;">
-			          	<a href="${pageContext.request.contextPath }/ride/${ride.rideCode}">
 			          		${ride.rideName }
 			          	</a>
 			          </div>

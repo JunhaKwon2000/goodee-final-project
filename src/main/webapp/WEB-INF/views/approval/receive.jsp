@@ -58,7 +58,7 @@
 	    			<div class="d-flex justify-content-end align-items-end">
     					<div class="input-group">
 							  <input type="text" class="form-control" id="searchText" value="${ requestScope.search }" style="width: 200px; height: 30px; border-radius: 0.375rem 0 0 0.375rem !important;" >
-							  <button class="btn btn-outline-secondary p-0 m-0" type="button" onclick="movePage()" style="width: 50px; height: 30px;" >검색</button>
+							  <button class="btn bg-gradient-dark text-white p-0 m-0" type="button" onclick="movePage()" style="width: 50px; height: 30px;" >검색</button>
 							</div>
 	    			</div>
 	    		</div>

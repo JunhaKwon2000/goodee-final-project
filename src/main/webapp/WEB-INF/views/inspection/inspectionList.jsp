@@ -16,6 +16,22 @@
 		.table tbody tr:last-child th {
 			border-bottom: 1px solid #dee2e6;
 		}
+	 
+ 	  /* 모달창 css */
+	 .my-cancel-btn {
+	  background-color: #fff !important;   
+	  color: #212529 !important;           
+	  border: 1px solid #ccc !important;   
+	  border-radius: 5px !important;       
+	}
+	
+	.my-cancel-btn:hover {
+	  background-color: #f8f9fa !important;
+	}
+	
+	.btn {
+		margin-bottom:1 !important;
+	}
 	</style>
 </head>
 
@@ -87,12 +103,13 @@
 					<th scope="col">점검 시작일</th>
 					<th scope="col">점검 종료일</th>
 					<th scope="col">체크리스트</th>
+					<th style="colspan:2;">수정/삭제</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${ inspection.content }" var="i">
 					<tr>
-						<td><a href="${pageContext.request.contextPath }/inspection/${ i.isptNum }">${ i.isptNum }</a></td>
+						<td>${ i.isptNum }</td>
 						<td scope="row">${ i.rideDTO.rideName }</td>
 						<!-- 점검유형 -->						
 						<c:if test="${ i.isptType eq 401 }">
@@ -125,6 +142,21 @@
 						     다운로드
 						  </a>
 						</td>
+						<td colspan="2" style="padding: 0; vertical-align: middle;">
+						  <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+						    <form action="${pageContext.request.contextPath }/inspection/${i.isptNum}/update"
+						          method="get"">
+						      <button type="submit" 
+						              class="btn btn-sm btn-outline-secondary bg-gradient-dark text-white"
+						              style="width: 50px; height: 32px; padding: 0; margin:1px 0 !important;">수정</button>
+						    </form>
+						    <button type="button" 
+						            class="btn btn-sm btn-outline-secondary"
+						            style="width: 50px; height: 32px; padding: 0;  margin-bottom:0 !important;"
+						            onclick="deleteInspection('${ i.isptNum }')">삭제</button>
+						  </div>
+						</td>
+
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -185,6 +217,7 @@
   </main>
 	<c:import url="/WEB-INF/views/common/footer.jsp"></c:import>
 	<script src="/js/inspection/inspectionList.js"></script>
+	<script src="/js/inspection/inspectionDetail.js"></script>
 	<script>
 		document.querySelector("i[data-content='어트랙션']").parentElement.classList.add("bg-gradient-dark", "text-white")
 		document.querySelector("i[data-content='어트랙션 점검']").parentElement.classList.add("bg-gradient-dark", "text-white")

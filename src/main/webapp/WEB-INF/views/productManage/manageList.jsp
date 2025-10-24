@@ -108,7 +108,7 @@
 		    					<td>${ pm.pmDate }</td>
 <%-- 				    					<td>${ pm.productDTO.productTypeDTO.productTypeName }</td> --%>
 <%-- 				    					<td>${ pm.productDTO.productCode }</td> --%>
-		    					<td><a data-bs-toggle="modal" data-bs-target="#pmDetailModal" href="/productManage/${ pm.pmNum }" style="color: #737373;">${ pm.productDTO.productName }</a></td>
+		    					<td><a data-bs-toggle="modal" data-bs-target="#pmDetailModal" href="/productManage/${ pm.pmNum }" style="color: #737373;">${ pm.productDTO.productName } [${pm.productDTO.productSpec }]</a></td>
 <%-- 				    					<td>${ pm.pmType eq 80 ? pm.pmAmount : "-" }</td> --%>
 <%-- 				    					<td>${ pm.pmType eq 90 ? pm.pmAmount : "-" }</td> --%>
 		    					<td>${ pm.pmType eq 90 ? "출고" : "입고" }</td>
@@ -167,7 +167,7 @@
 		   		</c:if>
 					<button class="btn btn-sm btn-outline-secondary bg-gradient-dark text-white ms-2"
 					        onclick="downloadExcel()">
-					    엑셀 다운로드
+					    Excel
 					</button>
 					<%-- <button class="btn btn-sm btn-outline-success text-white ms-2"
         onclick="location.href='/productManage/excel?search=${searchKeyword}'"

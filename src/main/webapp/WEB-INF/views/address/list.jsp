@@ -10,12 +10,6 @@
 		.sidenav .nav-link {
   white-space: nowrap; /* 줄바꿈 방지 */
 }
-aside.sidenav {
-  width: 200px !important;   /* 원하는 값 (180~220px 정도 추천) */
-  min-width: 200px !important;
-  max-width: 200px !important;
-}
-	
 	</style>
 	<c:import url="/WEB-INF/views/common/header.jsp"></c:import>
 </head>

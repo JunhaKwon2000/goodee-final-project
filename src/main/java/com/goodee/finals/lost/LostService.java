@@ -1,8 +1,15 @@
 package com.goodee.finals.lost;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDate;
+import java.util.List;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +21,7 @@ import com.goodee.finals.common.attachment.AttachmentDTO;
 import com.goodee.finals.common.attachment.AttachmentRepository;
 import com.goodee.finals.common.attachment.LostAttachmentDTO;
 import com.goodee.finals.common.file.FileService;
+import com.goodee.finals.productManage.ProductManageDTO;
 import com.goodee.finals.staff.StaffDTO;
 
 import jakarta.transaction.Transactional;
@@ -136,4 +144,41 @@ public class LostService {
 		return result;
 	}
 	
+	// 엑셀용 전체 리스트
+    public List<LostDTO> getLostSearchListForExcel(LocalDate startDate, LocalDate endDate, String search) {
+        return lostRepository.findBySearchKeyword(startDate, endDate, search);
+    }
+
+    // 엑셀 작성
+    public void writeLostExcel(List<LostDTO> list, OutputStream os) throws IOException {
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("분실물");
+
+        // 헤더 작성
+        Row header = sheet.createRow(0);
+        String[] headers = {"관리번호", "분실물명", "작성자", "연락처", "등록일자"};
+        for (int i = 0; i < headers.length; i++) {
+            Cell cell = header.createCell(i);
+            cell.setCellValue(headers[i]);
+        }
+
+        // 데이터 작성
+        int rowIdx = 1;
+        for (LostDTO lost : list) {
+            Row row = sheet.createRow(rowIdx++);
+            row.createCell(0).setCellValue(lost.getLostNum());
+            row.createCell(1).setCellValue(lost.getLostName());
+            row.createCell(2).setCellValue(lost.getStaffDTO().getStaffName());
+            row.createCell(3).setCellValue(lost.getStaffDTO().getStaffPhone());
+            row.createCell(4).setCellValue(lost.getLostDate());
+        }
+
+        // 열 너비 자동 조정
+        for (int i = 0; i < headers.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        workbook.write(os);
+        workbook.close();
+    }
 }

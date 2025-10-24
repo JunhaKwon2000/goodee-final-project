@@ -6,7 +6,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Index</title>
+	<title>대시보드</title>
 	
 	<c:import url="/WEB-INF/views/common/header.jsp"></c:import>
 	<style>
@@ -58,6 +58,20 @@
 		
 		.dash-div::-webkit-scrollbar {
 		  display: none;
+		}
+		.fc-list-day-text { color: white; } 		
+		.fc-list-day-cushion.fc-cell-shaded { background-color: #42424a; !important; }
+		.my-event.type-2001.fc-list-event { background-color: #E67E22 !important; }
+		.my-event.type-2002.fc-list-event { background-color: #2E86DE !important; }
+		.my-event.type-2003.fc-list-event { background-color: #16A085 !important; }
+		.fc-list-event-time { color: white; }
+		.fc-list-event-title { color: white; }
+ 		.fc .fc-list-event.fc-event:hover { color: white }
+		tr.fc-list-event:hover td {
+		  background-color: inherit !important;
+		  color: inherit !important;
+		  box-shadow: none !important;
+		  text-decoration: none !important;
 		}
 	</style>
 </head>
@@ -301,7 +315,7 @@
 				end: plusOneDay(cal),     
 				backgroundColor: eventBgColor(cal.calType),
 				borderColor: "transparent",
-				classNames: ['my-event'],
+				classNames: ['my-event', 'type-' + cal.calType],
 				editable : false,
 				extendedProps: {
 					calNum      : cal.calNum,

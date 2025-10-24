@@ -16,7 +16,7 @@
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
     <c:import url="/WEB-INF/views/common/nav.jsp"></c:import>
     <div class="d-flex">
-    	<aside class="sidenav navbar navbar-vertical border-radius-lg ms-2 bg-white my-2 align-items-start" style="width: 200px; height: 92vh;">
+    	<aside class="sidenav navbar navbar-vertical border-radius-lg ms-2 bg-white my-2 align-items-start" style="width: 200px !important; height: 92vh;">
     		<div class="w-100">
 			    <ul class="navbar-nav">
 			    
@@ -80,7 +80,7 @@
 	    			<div class="d-flex justify-content-end align-items-end">
     					<div class="input-group">
 							  <input type="text" class="form-control" id="searchText" value="${ requestScope.search }" style="width: 200px; height: 30px; border-radius: 0.375rem 0 0 0.375rem !important;" >
-							  <button class="btn btn-outline-secondary p-0 m-0" type="button" onclick="movePage()" style="width: 50px; height: 30px;" >검색</button>
+							  <button class="btn bg-gradient-dark text-white p-0 m-0" type="button" onclick="movePage()" style="width: 50px; height: 30px;" >검색</button>
 							</div>
 	    			</div>
 	    		</div>

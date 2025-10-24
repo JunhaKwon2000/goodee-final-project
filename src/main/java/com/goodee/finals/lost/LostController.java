@@ -1,5 +1,8 @@
 package com.goodee.finals.lost;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +25,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.goodee.finals.productManage.ProductManageDTO;
 import com.goodee.finals.staff.StaffDTO;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
@@ -59,6 +64,28 @@ public class LostController {
 		model.addAttribute("totalLost", totalLost);
 		
 		return "lost/list";
+	}
+	
+	@GetMapping("/excel")
+	public void downloadExcel(@RequestParam(required = false) String search, 
+								@RequestParam(value="startDate", required = false) String startDateStr,
+						        @RequestParam(value="endDate", required = false) String endDateStr,
+								HttpServletResponse response) throws IOException {
+	    if (search == null) search = "";
+	    LocalDate startDate = (startDateStr == null) ? null : LocalDate.parse(startDateStr);
+		LocalDate endDate = (endDateStr == null) ? null : LocalDate.parse(endDateStr);
+
+	    // 전체 데이터 조회
+	    List<LostDTO> list = lostService.getLostSearchListForExcel(startDate, endDate, search);
+
+	    // 파일명 지정
+	    String fileName = URLEncoder.encode("분실물.xlsx", StandardCharsets.UTF_8);
+
+	    response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+	    response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+
+	    // 서비스에서 엑셀 파일 생성
+	    lostService.writeLostExcel(list, response.getOutputStream());
 	}
 	
 	@GetMapping("{lostNum}")

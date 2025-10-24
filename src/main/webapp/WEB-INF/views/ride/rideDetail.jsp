@@ -61,9 +61,9 @@
         <div class="col-10">
 		  <!-- 레일형 / 고속형 어트랙션 -->
           <div class="card my-4 mt-8 m-8">
-			  <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-			    <div class="bg-gradient-dark shadow-dark border-radius-lg pt-3 pb-4">
-			      <h2 class="text-white text-capitalize ps-5 mt-3"> ${ride.rideName } </h2>
+			  <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 w-50">
+			    <div class="bg-gradient-dark shadow-dark border-radius-lg pt-3 pb-2">
+			      <h3 class="text-white text-capitalize text-center"> ${ride.rideName } </h3>
 			    </div>
 			  </div>
 		  
@@ -71,14 +71,14 @@
 				  <div class="row ride-content">
 				    
 				    <!-- 왼쪽: 어트랙션 이미지 -->
-				    <div class="col-md-6 text-center">
-				      <img alt="" 
+				    <div class="col-md-6 text-center p-0 ms-3" style="width: 400px; height: 400px; border: 1px solid black; overflow: hidden;">
+				      <img width="400" height="400" alt="" 
 				           src="/file/ride/${ ride.rideAttachmentDTO.attachmentDTO.savedName }" 
-				           style="width:400px; height:400px; object-fit:cover;">
+				           style="object-fit:cover;">
 				    </div>
 				
 				    <!-- 오른쪽: 상세 정보 -->
-				    <div class="col-md-6 ride-info">
+				    <div class="col-md-6 ride-info ms-3">
 				      <table class="table">
 				        <tr>
 				          <th>어트랙션 코드  </th>
@@ -138,7 +138,7 @@
 			
 			<!-- 시설부서(deptCode == 1003)일 때만 등록 버튼 보이기 -->
 			<c:if test="${staff.deptDTO.deptCode eq 1003}">
-			    <div class="form-group row mt-4 text-end">
+			    <div class="form-group row my-3 text-end">
 			      <div class="col-sm-11">
 			      	<!-- 수정 버튼 -> add 페이지로가는데 입력된 정보 가지고 감 -->
 			      	<form action="${pageContext.request.contextPath }/ride/${ride.rideCode}/update"

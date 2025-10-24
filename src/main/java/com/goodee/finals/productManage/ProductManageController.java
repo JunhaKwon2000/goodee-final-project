@@ -127,23 +127,45 @@ public class ProductManageController {
 	}
 	
 	@PostMapping("write")
-	public String Write(@Valid ProductManageDTO productManageDTO, BindingResult bindingResult, ProductDTO pDTO, Model model) {
+	public String Write(@Valid ProductManageDTO pmDTO, BindingResult bindingResult, ProductDTO pDTO, Model model) {
 		List<Integer> checkList = new ArrayList<>();
+		long pAmount = 0L;
 		
-		if(bindingResult.hasErrors()) checkList.add(1);
-		if (pDTO.getProductCode() == null) checkList.add(2);
+		// 입출고대상 선택 안 했을 때
+		if(pDTO == null || pDTO.getProductCode() == null) {
+			checkList.add(2);
+			
+		}else {
+			
+			ProductDTO productCheck = pService.getProduct(pDTO.getProductCode());
+			pAmount = productCheck.getProductAmount();
+			
+			if(pmDTO != null && pmDTO.getPmAmount() != null) {
+				if(pmDTO.getPmType() == 80 && pmDTO.getPmAmount() < 0 && -(pmDTO.getPmAmount()) > pAmount) {
+					checkList.add(3);
+				}
+				if(pmDTO.getPmType() == 90 && pmDTO.getPmAmount() > 0 && pmDTO.getPmAmount() > pAmount) {
+					checkList.add(3);
+				}
+			}
+		}
 		
 		if (!checkList.isEmpty()) {
 			for (int check : checkList) {
 				if(check == 2) {
-					model.addAttribute("pmAmount", productManageDTO.getPmAmount());
+					model.addAttribute("pmAmount", pmDTO.getPmAmount());
 					model.addAttribute("productCodeMsg", "입출고 대상을 지정해주세요. (우측상단 물품검색)");
+				}
+				if (check == 3) {
+					model.addAttribute("pmAmountMsg", "현재 재고 수량을 확인해주세요. (재고수량: " + pAmount + ")");
 				}
 			}
 			return "productManage/manageWrite";
 		}
 		
-		ProductManageDTO result = pmService.write(pDTO, productManageDTO);
+		if(bindingResult.hasErrors()) return "productManage/manageWrite";
+		
+		ProductManageDTO result = pmService.write(pDTO, pmDTO);
 		
 		String resultMsg = "입출고 등록 중 오류가 발생했습니다.";
 		String resultIcon = "warning";
@@ -189,30 +211,4 @@ public class ProductManageController {
 		return "productManage/stockReport";
 	}
 	
-//	@GetMapping("summary")
-//	public String getSummary(
-//	        @RequestParam(required = false) String startDate,
-//	        @RequestParam(required = false) String endDate,
-//	        @RequestParam(required = false) String keyword,
-//	        @RequestParam(required = false) String type,
-//	        @RequestParam(required = false) Integer productTypeCode,
-//	        Model model) {
-//
-//	    // 물품타입 리스트 (보통은 DB나 enum에서 불러옴)
-//	    List<ProductTypeDTO> productTypeList = List.of(
-//	        new ProductTypeDTO(801, "식음료소모품"),
-//	        new ProductTypeDTO(802, "장비"),
-//	        new ProductTypeDTO(803, "수리소모품"),
-//	        new ProductTypeDTO(804, "기타")
-//	    );
-//	    model.addAttribute("productTypeList", productTypeList);
-//
-//	    // 조회 서비스 호출
-//	    List<ProductLogDTO> logs = pService.findLogs(startDate, endDate, keyword, type, productTypeCode);
-//
-//	    // ... 나머지 합계 계산 및 모델 설정
-//	    model.addAttribute("productList", logs);
-//
-//	    return "productManage/summary";
-//	}
 }

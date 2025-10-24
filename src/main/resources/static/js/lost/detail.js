@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <tr><th>등록일자</th><td>${data.lostDate}</td></tr>
             <tr><th>분실물명</th><td>${data.lostName}</td></tr>
             <tr><th>습득자 연락처</th><td>${data.lostFinder || ''} / ${data.lostFinderPhone || ''}</td></tr>
-            <tr style="border-bottom: 1px solid #dee2e6;"><th>특이사항</th><td>${data.lostNote || ''}</td></tr>
+            <tr style="border-bottom: 1px solid #dee2e6;"><th>특이사항</th><td style="word-wrap: break-word; overflow-wrap: break-word; white-space: normal;">${data.lostNote || ''}</td></tr>
           `;
 
           // 로그인 사용자와 작성자 비교 후 버튼 표시

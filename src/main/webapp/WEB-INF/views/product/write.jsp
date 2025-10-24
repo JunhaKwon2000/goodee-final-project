@@ -118,7 +118,7 @@
 		
 		<div class="form-group">
 		  <form:label path="productSpec">규격<span class="text-danger"> *</span></form:label>
-		  <form:input path="productSpec" cssClass="form-control"/>
+		  <form:input path="productSpec" cssClass="form-control" placeholder="ex) 140mm/100ea/흰색"/>
 		  <form:errors path="productSpec" cssClass="text-danger small"></form:errors>
 		</div>
 
@@ -127,7 +127,7 @@
 
 		<div class="mt-4 d-flex justify-content-center gap-3">
 	        <button type="submit" class="btn btn-sm btn-outline-secondary bg-gradient-dark text-white me-3" style="width: 100px;">${ empty productDTO.productCode ? "등록" : "수정" }</button>
-	        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="history.back();" style="width: 100px;">취소</button>
+	        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/product'" style="width: 100px;">취소</button>
 	    </div>
       </div>
 		</form:form>

@@ -45,15 +45,15 @@ public interface AttendRepository extends JpaRepository<AttendDTO, Long>{
 	List<HolidayDTO> findByMonth(String monthStr);
 	
 	// 연장근로 리스트	
-	@Query("SELECT o FROM OvertimeDTO o JOIN o.approvalDTO a WHERE a.staffDTO.staffCode = :staffCode AND to_char(o.overStart, 'yyyymm') = :monthStr")
+	@Query("SELECT o FROM OvertimeDTO o JOIN o.approvalDTO a WHERE a.aprvState = 702 AND a.staffDTO.staffCode = :staffCode AND to_char(o.overStart, 'yyyymm') = :monthStr")
 	List<OvertimeDTO> findAllOvertimeByStaffCodeAndByMonth(Integer staffCode, String monthStr);
 	
 	// 휴가연차 리스트	
-	@Query("SELECT v FROM VacationDTO v JOIN v.approvalDTO a WHERE a.staffDTO.staffCode = :staffCode AND to_char(v.vacStart, 'yyyymm') = :monthStr AND to_char(v.vacEnd, 'yyyymm') = :monthStr")
+	@Query("SELECT v FROM VacationDTO v JOIN v.approvalDTO a WHERE a.aprvState = 702 AND a.staffDTO.staffCode = :staffCode AND to_char(v.vacStart, 'yyyymm') = :monthStr AND to_char(v.vacEnd, 'yyyymm') = :monthStr")
 	List<VacationDTO> findAllVacationByStaffCodeAndByMonth(Integer staffCode, String monthStr);
 	
 	// 조기퇴근 리스트	
-	@Query("SELECT e FROM EarlyDTO e JOIN e.approvalDTO a WHERE a.staffDTO.staffCode = :staffCode AND to_char(e.earlyDtm, 'yyyymm') = :monthStr")
+	@Query("SELECT e FROM EarlyDTO e JOIN e.approvalDTO a WHERE a.aprvState = 702 AND a.staffDTO.staffCode = :staffCode AND to_char(e.earlyDtm, 'yyyymm') = :monthStr")
 	List<EarlyDTO> findAllEarlyByStaffCodeAndByMonth(Integer staffCode, String monthStr);
 	
 	// 휴무일 제외한 출퇴근 내역 가져오기
@@ -108,7 +108,8 @@ public interface AttendRepository extends JpaRepository<AttendDTO, Long>{
     	    SELECT o 
     	    FROM OvertimeDTO o 
     	    JOIN o.approvalDTO a 
-    	    WHERE a.staffDTO.staffCode = :staffCode
+    	    WHERE a.aprvState = 702
+    	      AND a.staffDTO.staffCode = :staffCode
     	      AND to_char(o.overStart, 'yyyy-mm-dd') BETWEEN :startDate AND :endDate
     	  """)
     List<OvertimeDTO> findOvertimeByStaffCodeAndWeek(
@@ -120,8 +121,9 @@ public interface AttendRepository extends JpaRepository<AttendDTO, Long>{
     @Query("""
     	    SELECT e 
     	    FROM EarlyDTO e 
-    	    JOIN e.approvalDTO a 
-    	    WHERE a.staffDTO.staffCode = :staffCode
+    	    JOIN e.approvalDTO a
+    	    WHERE a.aprvState = 702 
+    	    AND a.staffDTO.staffCode = :staffCode
     	      AND to_char(e.earlyDtm, 'yyyy-mm-dd') BETWEEN :startDate AND :endDate
     	  """)
     List<EarlyDTO> findEarlyByStaffCodeAndWeek(

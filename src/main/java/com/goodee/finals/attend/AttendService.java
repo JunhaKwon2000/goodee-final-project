@@ -98,7 +98,7 @@ public class AttendService {
 			holiday.add(holidayDTO.getDate().getDayOfMonth());
 		}
 		
-		// 연차 리스트 가져오기
+		// 휴가 리스트 가져오기
 		List<VacationDTO> vacationList = attendRepository.findAllVacationByStaffCodeAndByMonth(staffCode, monthStr);
 		for (VacationDTO vacationDTO : vacationList) {
 			

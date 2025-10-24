@@ -49,10 +49,10 @@
 						
 			<!-- 어트랙션 코드 -->
 			<div class="form-group row mb-3">
-			  <form:label path="rideDTO.rideCode" class="col-sm-4 col-form-label text-start">어트랙션 코드</form:label>
+			  <form:label path="rideDTO.rideCode" class="col-sm-4 col-form-label text-start">어트랙션</form:label>
 			  <div class="col-sm-5">
 			    <form:select path="rideDTO.rideCode" cssClass="form-select">
-			      <form:option value="">-- 어트랙션 코드를 선택하세요 --</form:option>
+			      <form:option value="">-- 어트랙션을 선택하세요 --</form:option>
 			      <c:forEach var="ride" items="${rideList}">
 			        <form:option value="${ride.rideCode}">${ride.rideName} (${ride.rideCode})</form:option>
 			      </c:forEach>
